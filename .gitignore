@@ -1,0 +1,8 @@
+build/bin
+node_modules
+frontend/dist
+frontend/wailsjs
+backend/logs
+backend/db
+.DS_Store
+logs

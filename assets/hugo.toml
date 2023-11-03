@@ -1,0 +1,23 @@
+baseURL = "http://local:1313/"
+languageCode = "zh-cn"
+defaultContentLanguage = "zh"
+title = "swallow"
+description = "this is my first blogs"
+theme = "mini"
+copyright = ""
+buildFuture = true
+
+[author]
+name = "swallow"
+
+[menu]
+main = [
+    { identifier = "home", name = "Home", url = "/", weight = 1 },
+    { identifier = "articles", name = "Articles", url = "/post", weight = 2 },
+    { identifier = "categories", name = "Categories", url = "/categories", weight = 3 },
+    { identifier = "tags", name = "Tags", url = "/tags", weight = 4 },
+    { identifier = "about", name = "About", url = "/about", weight = 5 },
+]
+
+[params]
+hiddenPostSummaryInHomePage = true
