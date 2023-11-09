@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"path"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -67,7 +68,13 @@ func (h *_hugos) Initialize() {
 	h.configFile = path.Join(h.SitePath, "hugo.toml")
 	h.PublicDir = path.Join(h.SitePath, "public")
 
-	err := CopyFile("assets/hugo", h.hugo, 0755)
+	var hugoAsset string
+	if runtime.GOOS == "windows" {
+		hugoAsset = "hugo.exe"
+	} else {
+		hugoAsset = "hugo"
+	}
+	err := CopyFile(path.Join("assets", hugoAsset), path.Join(APP_HOME, hugoAsset), 0755)
 	if err != nil {
 		Logger.Error("copy config fail", zap.Error(err))
 		return
