@@ -50,7 +50,7 @@ jobs:
         shell: bash
         run: |
           rm -rf ./build/bin/${{ matrix.output }}.app.zip
-          ditto -c -k --keepParent ./build/bin/${{matrix.output}}.app ./build/bin/${{matrix.output}}.app.zip
+          zip -q -r ./build/bin/${{matrix.output}}.app.zip ./build/bin/${{matrix.output}}.app
           rm -rf ./build/bin/${{ matrix.output }}.app
 
       - uses: actions/upload-artifact@v2
