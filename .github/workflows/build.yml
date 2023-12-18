@@ -40,8 +40,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm install && npm run build
-        working-directory: frontend
       - uses: dAppServer/wails-build-action@v2
         with:
           build-name: ${{ matrix.output }}
@@ -93,4 +91,3 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: target/*
-          body_path: ${{ env.commit_messages_path }}
