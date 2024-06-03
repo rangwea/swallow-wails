@@ -270,7 +270,7 @@ func (a *App) ArticleInsertImage(aid string) *R {
 	os.Mkdir(imageDir, os.ModePerm)
 
 	localPath, sitePath := Hugo.genArticleImagePath(aid)
-	err = CopyAsset(selection, localPath)
+	err = CopyFile(selection, localPath)
 	if err != nil {
 		slog.Error("copy image fail", err)
 		return failM(err.Error())

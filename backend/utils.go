@@ -55,6 +55,22 @@ func CopyAsset(src string, dst string, fileModel ...os.FileMode) (err error) {
 	return nil
 }
 
+func CopyFile(src string, dst string, fileModel ...os.FileMode) (err error) {
+	hb, err := os.ReadFile(src)
+	if err != nil {
+		return
+	}
+	fm := os.ModePerm
+	if fileModel != nil {
+		fm = fileModel[0]
+	}
+	err = os.WriteFile(dst, hb, fm)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func UnZip(src string, dst string) error {
 	zr, err := zip.OpenReader(src)
 	if err != nil {
