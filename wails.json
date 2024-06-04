@@ -1,0 +1,15 @@
+{
+    "$schema": "https://wails.io/schemas/config.v2.json",
+    "name": "swallow",
+    "outputfilename": "swallow",
+    "frontend:install": "npm install",
+    "frontend:build": "npm run build",
+    "frontend:dev:watcher": "npm run dev",
+    "frontend:dev:serverUrl": "auto",
+    "author": {
+      "name": "Andy",
+      "email": "wikia.woo@gmail.com"
+    },
+    "assetdir": "assets"
+  }
+  
