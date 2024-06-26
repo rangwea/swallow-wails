@@ -349,6 +349,9 @@ func (h *_hugo) SplitMetaAndContent(article string) (meta string, content string
 	for sc.Scan() {
 		lines = append(lines, sc.Text())
 	}
+	if len(lines) == 0 {
+		return "", ""
+	}
 
 	inMeta := false
 	// the index of second +++

@@ -37,7 +37,7 @@ function ArticleEditor() {
 
   const mdTextAreaId = "mdTextArea";
 
-  const [saveBtnColor, setSaveBtnColor] = useState("green")
+  const [changed, setChanged] = useState(false)
 
   useEffect(() => {
     init();
@@ -45,10 +45,10 @@ function ArticleEditor() {
 
   function init() {
     if (id) {
-      // exiestd id，edit
+      // existed id，edit
       ArticleGet(id).then((result) => {
         if (result.code !== 1) {
-          message.error("获取文章失败:" + result.msg);
+          message.error("get articles fail:" + result.msg);
           return;
         }
         let meta = result.data.meta;
@@ -72,11 +72,11 @@ function ArticleEditor() {
       if (r.code === 1) {
         // success
         setId(r.data);
-        message.info("save success");
-        setSaveBtnColor("black")
+        message.info("save success", 1);
+        setChanged(false)
       } else {
         // fail
-        message.error("save fail:", r.msg);
+        message.error(r.msg);
       }
     });
   }
@@ -105,21 +105,28 @@ function ArticleEditor() {
   }
 
   function contentChange(c) {
-    setSaveBtnColor("green")
+    setChanged(true)
     setContent(c)
   }
 
   function ToolBtns() {
     return (
       <>
-        <div style={{ position: "fixed", right: 15, top: 30 }}>
+        <div style={{ position: "fixed", left: 15, top: 60 }}>
           <Space direction="vertical">
             <Button
-              icon={<CheckOutlined style={{color: saveBtnColor}}/>}
+              icon={<CheckOutlined style={{color: changed?'green':'black'}}/>}
               onClick={save}
               shape="circle"
               size="small"
             ></Button>
+            <Link to="/articleList">
+              <Button
+                  icon={<ArrowLeftOutlined />}
+                  shape="circle"
+                  size="small"
+              ></Button>
+            </Link>
             {id !== "about" && (
               <Button
                 icon={<SettingOutlined />}
@@ -140,13 +147,6 @@ function ArticleEditor() {
               shape="circle"
               size="small"
             ></Button>
-            <Link to="/articleList">
-              <Button
-                icon={<ArrowLeftOutlined />}
-                shape="circle"
-                size="small"
-              ></Button>
-            </Link>
           </Space>
         </div>
       </>
@@ -195,6 +195,15 @@ function ArticleEditor() {
     });
   }
 
+  function titleChange(e) {
+    setChanged(true)
+    setTitle(e.target.value)
+  }
+
+  function metaChange() {
+    setChanged(true)
+  }
+
   return (
     <>
       <Row justify="center" style={{ "--wails-draggable": "drag" }}>
@@ -205,11 +214,12 @@ function ArticleEditor() {
               marginTop: 30,
               marginBottom: 5,
               border: "none",
+              fontWeight: "bold",
               "--wails-draggable": "no-drag",
             }}
             size="large"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={titleChange}
           ></Input>
           <MDEditor
             value={content}
@@ -249,7 +259,7 @@ function ArticleEditor() {
         onClose={() => setDrawerOpen(false)}
         key="drawer"
       >
-        <Form form={form} labelCol={{ span: 5 }}>
+        <Form form={form} labelCol={{ span: 5 }} onFieldsChange={metaChange}>
           <Form.Item label="Tags" name="tags">
             <TagInput></TagInput>
           </Form.Item>

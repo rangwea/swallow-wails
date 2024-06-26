@@ -9,26 +9,23 @@ export function getCurrentTime() {
  * format date time: yyyy-MM-dd HH:MM:SS
  */
 export function formatDateTime(value) {
-  var month = zeroFill(value.getMonth() + 1);
-  var day = zeroFill(value.getDate());
-  var hour = zeroFill(value.getHours());
-  var minute = zeroFill(value.getMinutes());
-  var second = zeroFill(value.getSeconds());
+  let month = zeroFill(value.getMonth() + 1);
+  let day = zeroFill(value.getDate());
+  let hour = zeroFill(value.getHours());
+  let minute = zeroFill(value.getMinutes());
+  let second = zeroFill(value.getSeconds());
 
-  var curTime =
-    value.getFullYear() +
-    "-" +
-    month +
-    "-" +
-    day +
-    " " +
-    hour +
-    ":" +
-    minute +
-    ":" +
-    second;
-
-  return curTime;
+  return value.getFullYear() +
+      "-" +
+      month +
+      "-" +
+      day +
+      " " +
+      hour +
+      ":" +
+      minute +
+      ":" +
+      second;
 }
 
 function zeroFill(i) {

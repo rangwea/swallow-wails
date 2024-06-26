@@ -23,7 +23,7 @@ func (c *LocalTime) UnmarshalJSON(b []byte) error {
 }
 
 func (c LocalTime) MarshalJSON() ([]byte, error) {
-	return []byte(`"` + time.Time(c).Format("2006-01-02 15:04:05") + `"`), nil
+	return []byte(`"` + time.Time(c).Format("2006-01-02") + `"`), nil
 }
 
 type Article struct {

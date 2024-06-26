@@ -55,7 +55,7 @@ function ArtistList() {
   function preview() {
     SitePreview().then((r) => {
       if (r.code !== 1) {
-        message.error(`preview fail:${r.msg}`);
+        message.error(r.msg);
       }
     });
   }
@@ -63,7 +63,7 @@ function ArtistList() {
   function deploy() {
     SiteDeploy().then((r) => {
       if (r.code !== 1) {
-        message.error(`deploy fail:${r.msg}`);
+        message.error(r.msg);
       }
     });
   }
@@ -102,12 +102,12 @@ function ArtistList() {
     if (checked.length > 0) {
       ArticleRemove(checked).then((r) => {
         if (r.code === 1) {
-          message.info(`removed ${checked.length} articles`);
+          message.info(`removed ${checked.length} articles`, 2);
           searchArticles("", null);
           setChecked([]);
           setDeleteBtnShow(false);
         } else {
-          message.error(`remove error: ${r.msg}`);
+          message.error(r.msg);
         }
       });
     }

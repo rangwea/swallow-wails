@@ -8,10 +8,10 @@ const TagInput = (props) => {
 
   function pressEnter(e) {
     if (e.target.value) {
-      var newvalue = [...value, e.target.value]
-      setValue(newvalue);
+      let new_value = [...value, e.target.value]
+      setValue(new_value);
       setValueInput("");
-      props.onChange(newvalue);
+      props.onChange(new_value);
     }
   }
 

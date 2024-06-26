@@ -32,7 +32,7 @@ function Config() {
   const [themeOptions, setThemeOptions] = useState([]);
 
   useEffect(() => {
-    getThemes()
+    getThemes();
     getConfigData(currentTabKey);
   }, []);
 
@@ -44,16 +44,15 @@ function Config() {
   const getThemes = () => {
     ConfGetThemes().then((result) => {
       if (result.code === 0) {
-        message.error("get themes fail:", result.msg);
+        message.error("get themes fail:" + result.msg);
       } else {
-        let ts = []
+        let ts = [];
         for (const x of result.data) {
           ts.push({
-            "value": x,
-            "label": x
-          })
+            value: x,
+            label: x,
+          });
         }
-        console.log(ts)
         setThemeOptions(ts);
       }
     });
@@ -63,7 +62,7 @@ function Config() {
     if (type === "website") {
       SiteConfigGet().then((result) => {
         if (result.code === 0) {
-          message.error("get website config fail:", result.msg);
+          message.error("get website config fail:" + result.msg);
         } else {
           websiteForm.setFieldsValue(result.data);
         }
@@ -71,7 +70,7 @@ function Config() {
     } else if (type === "github") {
       ConfGet("github").then((r) => {
         if (r.code === 0) {
-          message.error("get config fail:", result.msg);
+          message.error("get config fail:" + result.msg);
         } else {
           githubForm.setFieldsValue(r.data);
         }
@@ -84,18 +83,18 @@ function Config() {
       let c = websiteForm.getFieldsValue();
       SiteConfigSave(c).then((r) => {
         if (r.code === 0) {
-          message.error("save fail:", r.msg);
+          message.error(r.msg);
         } else {
-          message.info("save success");
+          message.info("save success", 1);
         }
       });
     } else if (currentTabKey === "github") {
       let c = githubForm.getFieldsValue();
       ConfSave("github", c).then((r) => {
         if (r.code === 0) {
-          message.error("save fail:", r.msg);
+          message.error(r.msg);
         } else {
-          message.info("save success");
+          message.info("save success", 1);
         }
       });
     }
@@ -106,7 +105,7 @@ function Config() {
       if (r.code === 1) {
         setMethod(`${src}?${new Date()}`);
       } else {
-        message.error("set image fail:", r.msg);
+        message.error(r.msg);
       }
     });
   }
